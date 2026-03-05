@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.theitdojo</groupId>
+        <artifactId>what-about-predictive-ai-devnexus</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>predictive-ai-clustering</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.theitdojo</groupId>
+            <artifactId>predictive-ai-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- Tribuo (K-Means) -->
+        <dependency>
+            <groupId>org.tribuo</groupId>
+            <artifactId>tribuo-all</artifactId>
+            <type>pom</type>
+        </dependency>
+
+        <!-- PCA helper math -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+            <version>3.6.1</version>
+        </dependency>
+    </dependencies>
+
+</project>

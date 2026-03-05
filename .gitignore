@@ -1,0 +1,38 @@
+# Maven
+**/target/
+
+# macOS
+.DS_Store
+
+# IntelliJ
+.idea/
+*.iml
+
+# Python virtual environments & caches (all modules)
+**/venv/
+**/__pycache__/
+
+# Python detection service
+python-detection-service/
+
+# Local artifacts
+provenance-exports/
+
+# Generated output files
+*-output.mp4
+*-output.png
+
+# Test images
+/test-frame.jpg
+/test.jpeg
+/test.webp
+
+# Model files at project root (originals in module resources)
+/*.onnx
+/*.pt
+
+# Video files at project root
+/*.mp4
+
+# Benchmarks
+/BENCHMARKS.md
