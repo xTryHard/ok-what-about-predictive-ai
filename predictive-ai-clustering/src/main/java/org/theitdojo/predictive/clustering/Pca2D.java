@@ -62,4 +62,8 @@ public final class Pca2D {
 
         return X.multiply(components.transpose()).getData();
     }
+
+    public RealMatrix getComponents() {
+        return components;
+    }
 }

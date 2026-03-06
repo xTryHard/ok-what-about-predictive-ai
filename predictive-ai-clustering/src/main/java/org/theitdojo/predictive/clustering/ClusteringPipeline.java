@@ -1,5 +1,6 @@
 package org.theitdojo.predictive.clustering;
 
+import org.apache.commons.math3.linear.RealMatrix;
 import org.theitdojo.predictive.core.Customer;
 
 import java.nio.file.Path;
@@ -85,26 +86,32 @@ public final class ClusteringPipeline {
         // -----------------------------
         // Automatic labels
         // -----------------------------
-        Map<Integer, String> labels = new HashMap<>();
+        System.out.println("\nCluster centroids (feature means):");
         for (var e : centroids.entrySet()) {
             int cid = e.getKey();
             double[] c = e.getValue();
 
-            double tenure = c[ClusteringFeatures.TENURE.ordinal()];
-            double charges = c[ClusteringFeatures.MONTHLY_CHARGES.ordinal()];
-
-            String label;
-            if (tenure > 40 && charges > 70) {
-                label = "Loyal High-Value";
-            } else if (tenure < 12 && charges > 70) {
-                label = "New High-Risk";
-            } else if (tenure > 40) {
-                label = "Stable Long-Term";
-            } else {
-                label = "Price-Sensitive";
+            System.out.println("\nCluster " + cid);
+            for (ClusteringFeatures f : ClusteringFeatures.values()) {
+                System.out.printf("%-20s %.2f%n", f.name(), c[f.ordinal()]);
             }
+        }
 
-            labels.put(cid, label);
+        Map<Integer, String> labels = getLabels(centroids);
+
+        // -----------------------------
+        // Principal components loading
+        // -----------------------------
+        System.out.println("\nPrincipal components:");
+        RealMatrix components = pca.getComponents();
+
+        for (int pc = 0; pc < 2; pc++) {
+            System.out.println("\nPC" + (pc + 1));
+            for (ClusteringFeatures f : ClusteringFeatures.values()) {
+                int idx = f.ordinal();
+                double value = components.getEntry(pc, idx);
+                System.out.printf("%-20s %.4f%n", f.name(), value);
+            }
         }
 
         // -----------------------------
@@ -119,5 +126,31 @@ public final class ClusteringPipeline {
         );
 
         return new Result(saved, k, points2d.size(), sizes, labels);
+    }
+
+    private static Map<Integer, String> getLabels(Map<Integer, double[]> centroids) {
+        Map<Integer, String> labels = new HashMap<>();
+
+        for (var e : centroids.entrySet()) {
+            int cid = e.getKey();
+            double[] c = e.getValue();
+
+            double total = c[ClusteringFeatures.TOTAL_CHARGES.ordinal()];
+
+            String label;
+
+            if (total < 800) {
+                label = "New / Low Engagement";
+            } else if (total < 3000) {
+                label = "Core Customers";
+            } else if (total < 5500) {
+                label = "High-Value Customers";
+            } else {
+                label = "Premium Power Users";
+            }
+
+            labels.put(cid, label);
+        }
+        return labels;
     }
 }

@@ -29,7 +29,7 @@ public final class ClusteringDemoMenu {
         var pipeline = new ClusteringPipeline(42L);
         var result = pipeline.run("/telco-customer-churn.csv", k, maxPoints, Path.of(out));
 
-        System.out.println("\n✅ Saved plot: " + result.imagePath().toAbsolutePath());
+        System.out.println("\nSaved plot: " + result.imagePath().toAbsolutePath());
 
         System.out.println("\nCluster summary:");
         for (Map.Entry<Integer, Integer> e : result.clusterSizes().entrySet()) {
