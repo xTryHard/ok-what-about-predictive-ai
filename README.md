@@ -27,7 +27,8 @@ what-about-predictive-ai/
 ├── predictive-ai-rl-bandit/     # Contextual bandit (adaptive offer optimization)
 ├── predictive-ai-clustering/    # K-Means segmentation + PCA visualization
 ├── predictive-ai-demos/         # Interactive CLI menu wiring all modules
-└── python-service/              # Optional Flask sidecar for HTTP inference
+├── python-service/              # Optional Flask sidecar for HTTP inference
+└── slides/                      # Presentation slides (PDF)
 ```
 
 ### Module Dependencies
@@ -49,6 +50,10 @@ core  <──  tribuo
   |
   └<── demos  ──>  (all modules)
 ```
+
+## Slides
+
+The presentation slides are available in the [`slides/`](slides/) directory.
 
 ## Prerequisites
 
